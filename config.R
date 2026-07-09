@@ -7,9 +7,11 @@ TO_DATE <- as.Date("2021-01-31")
 
 
 
-# Polygon key (local file)
-POLYGON_KEY_PATH <- "~/Desktop/PROGETTO_VOLATILITÀ/polygon_key.txt"
-POLYGON_KEY <- readLines(POLYGON_KEY_PATH, warn = FALSE)[1]
+# Polygon API key
+POLYGON_KEY <- Sys.getenv("POLYGON_API_KEY")
+if (POLYGON_KEY == "") {
+  stop("Missing POLYGON_API_KEY. Add it to your ~/.Renviron file.")
+}
 
 
 
