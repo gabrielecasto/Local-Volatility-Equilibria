@@ -99,9 +99,11 @@ SymmetrizeEdges <- function(edges) {
   edges$to   <- trimws(as.character(edges$to))
   
   edges <- edges[is.finite(edges$weight), , drop = FALSE]
-  if (is.null(edges) || nrow(edges) == 0) {
-    stop("No edges produced (maybe all weights <= 0).")
-  }
+  edges <- edges[
+    !is.na(edges$from) & !is.na(edges$to) &
+      edges$from != "" & edges$to != "",
+    , drop = FALSE
+  ]
   edges <- edges[edges$from != edges$to, , drop = FALSE]
   
   key <- paste(pmin(edges$from, edges$to), pmax(edges$from, edges$to), sep="__")
