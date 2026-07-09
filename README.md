@@ -2,7 +2,7 @@
 
 This repository contains an empirical R project that explores the **localization of local volatility equilibria** across S&P 500 stocks using high-frequency intraday data.
 
-The code is designed as an experimental research pipeline. Its goal is not to provide a trading strategy, but to investigate whether groups of stocks can be identified whose realized volatility dynamics display relatively stable and cohesive relationships over time.
+The code is designed as an experimental research pipeline. Its goal is to investigate whether groups of stocks can be identified whose realized volatility dynamics display relatively stable and cohesive relationships over time.
 
 The project starts from minute-level stock prices, computes realized volatility, studies relative volatility structures, and then applies several stability-based and cohesion-based selection methods to search for local volatility equilibria.
 
@@ -68,13 +68,9 @@ The Polygon API key is read from the environment variable:
 POLYGON_API_KEY
 ```
 
-The API key should never be written directly inside the code or uploaded to GitHub.
-
 ### `import.R`
 
 Imports the stock universe and downloads minute-level price data.
-
-The script first retrieves S&P 500 tickers, using Slickcharts as the primary source and `tidyquant` as a fallback. It then downloads minute-level adjusted close prices from Polygon and builds a wide intraday data frame where each column corresponds to one stock.
 
 The import procedure also includes a patching mechanism for ticker-day combinations with extreme missingness, which can occur because of temporary API failures during large downloads.
 
@@ -195,86 +191,6 @@ In the graph:
 
 The graph provides a visual representation of the empirical local volatility structure identified by the model.
 
-## Empirical Workflow
-
-The full empirical workflow is:
-
-```text
-1. Import S&P 500 tickers
-2. Download minute-level stock prices
-3. Align all prices to a complete trading-minute grid
-4. Clean missing data and remove low-quality tickers
-5. Compute intraday log returns
-6. Remove early-close periods
-7. Compute realized volatility on non-overlapping windows
-8. Construct Historical Volatility Ratios
-9. Evaluate distributional stability through Wasserstein distances
-10. Evaluate dynamic cohesion through relative log-volatility persistence
-11. Apply forward selection algorithms
-12. Identify local volatility equilibria using a stopping rule
-13. Build the full score matrix of local volatility connections
-14. Plot the final local volatility network
-```
-
-## Main Objects Produced
-
-The main objects produced by the code are:
-
-```r
-REALIZED_VOLATILITY
-HVR
-STABILITY_INDIVIDUAL_HVR
-STABILITY_MULTIVARIATE_VOL
-STABILITY_MULTIVARIATE_DEP_VOL
-STABILITY_AVG_HVR
-STABILITY_DIST_HVR
-RESULTS
-LOCAL_EQUILIBRIUM
-W_dist
-W_coh
-W_total
-```
-
-### `REALIZED_VOLATILITY`
-
-Panel of realized volatility estimates for all selected stocks.
-
-### `HVR`
-
-Panel of Historical Volatility Ratios relative to the chosen target stock.
-
-### `STABILITY_INDIVIDUAL_HVR`
-
-Ranking of individual HVR series according to local and global distributional stability.
-
-### `STABILITY_MULTIVARIATE_VOL`
-
-Forward selection results based on multivariate realized volatility level stability.
-
-### `STABILITY_MULTIVARIATE_DEP_VOL`
-
-Forward selection results based on copula-transformed volatility dependence stability.
-
-### `STABILITY_AVG_HVR`
-
-Forward selection results based on the time-series stability of log-HVRs relative to an average volatility anchor.
-
-### `STABILITY_DIST_HVR`
-
-Forward selection results based on rolling distributional stability of log-HVRs.
-
-### `RESULTS`
-
-Final forward selection output combining distributional stability and dynamic cohesion.
-
-### `LOCAL_EQUILIBRIUM`
-
-The final selected subset of stocks interpreted as a localized volatility equilibrium.
-
-### `W_dist`, `W_coh`, `W_total`
-
-Matrices used to map pairwise local volatility connections across stocks.
-
 ## How to Run the Code
 
 ### 1. Clone the repository
@@ -300,22 +216,7 @@ Restart R after saving the file.
 
 ### 4. Check the configuration file
 
-Before running the project, check the parameters in `config.R`, especially:
-
-```r
-STARTING_DATE
-TO_DATE
-PRESENT_DATETIME
-WINDOW
-TARGET_STOCK
-COVERAGE_TRESHOLD
-GAP_THR_DAY
-BIG_GAP_THR
-MAX_GAP_ANY
-ZERO_SHARE_THR
-N_EMPIRICAL_DIST
-p_chosen
-```
+Before running the project, check the parameters in `config.R`
 
 Important: `PRESENT_DATETIME` must correspond to a valid timestamp in the realized volatility sample, because it is used to split the observations into training and testing periods.
 
@@ -355,26 +256,3 @@ ggraph
 ```
 
 The file `setup.R` installs missing packages automatically.
-
-## Notes on Interpretation
-
-This project should be interpreted as an empirical experiment in volatility structure detection.
-
-The selected local equilibria depend on:
-
-* the sample period;
-* the realized volatility window;
-* the chosen seed stock;
-* the target stock used for HVRs;
-* the Wasserstein distance parameters;
-* the size of rolling empirical distributions;
-* the cleaning thresholds;
-* the stopping rule.
-
-Therefore, the results should be read as exploratory evidence of local volatility structures, not as definitive or universal relationships.
-
-## Disclaimer
-
-This repository is intended for academic and research purposes only.
-
-The code explores empirical methods for identifying local volatility equilibria in financial markets. The results should not be interpreted as investment advice, financial advice, or as a ready-to-use trading strategy.
