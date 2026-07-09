@@ -16,8 +16,7 @@ sources <- c(
   "cleaning.R",
   "Volatility_Window.R",
   "Volatility_Equilibria.R",
-  "Map.R",
-  "Graph.R"
+  "Map.R"
 )
 
 stopifnot(all(file.exists(sources)))
@@ -378,3 +377,5 @@ SECTORS <- GetSectorsWikipedia(tickers = TICKERS)
 # In this section we generate the graph of local volatility connections.
 # The graph uses the total score matrix W_total as edge weight and market
 # capitalization as node size.
+
+source("Graph.R")
