@@ -1,0 +1,27 @@
+# API keys and secrets
+polygon_key.txt
+.env
+.Renviron
+*.key
+*.pem
+*.secret
+
+# R / RStudio
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+
+# macOS
+.DS_Store
+
+# Outputs / large data
+data/
+raw_data/
+outputs/
+results/
+*.csv
+*.rds
+*.RDS
+*.xlsx
+*.zip
