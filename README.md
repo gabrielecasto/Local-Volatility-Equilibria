@@ -6,7 +6,7 @@ The code is designed as an experimental research pipeline. Its goal is to invest
 
 The project starts from minute-level stock prices, computes realized volatility, studies relative volatility structures, and then applies several stability-based and cohesion-based selection methods to search for local volatility equilibria.
 
-# Important
+## Important
 
 This repository represents a first research draft of the project. The current pipeline is mainly exploratory and is used to empirically test different methods for localizing local volatility equilibria. The most promising approaches will be further developed in a new and more complete pipeline, with stronger code robustness, improved methodological validation, additional statistical tests, and out-of-sample evaluation of the methods that appear to work empirically.
 
