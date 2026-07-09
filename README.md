@@ -1,6 +1,6 @@
 # Local Volatility Equilibria
 
-This repository contains an empirical R project that explores the **localization of local volatility equilibria** across S&P 500 stocks using high-frequency intraday data.
+This repository contains an empirical R project that explores the **localization of local volatility equilibria** across S&P 500 stocks using intraday data.
 
 The code is designed as an experimental research pipeline. Its goal is to investigate whether groups of stocks can be identified whose realized volatility dynamics display relatively stable and cohesive relationships over time.
 
