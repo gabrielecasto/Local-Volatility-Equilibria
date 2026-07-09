@@ -244,11 +244,7 @@ ForwardSelectionStability <- function(windows, start, K = 10) {
 
 #_________________STABILITY_OF_MULTIVARIATE_DEPENDENCE_COPULA___________________
 
-################################################################################
-################################################################################
-################################################################################
-################################################################################
-################################################################################
+
 
 # This function prepares the data frame containing realized volatility
 # estimations for the identification of the most stable multivariate
@@ -387,25 +383,6 @@ ForwardSelectionDependence <- function(windows, start, K = 10) {
   # Return selected assets and full selection path
   list(selected = sel, history = hist)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -365,16 +365,16 @@ W_coh  <- W$W_coh
 
 W_total <- BuildWTotal(W_dist, W_coh, lambda = 0.5)
 
-#FROM = as.POSIXct("2025-04-01 10:00:00", tz = "America/New_York")
-#TO = as.POSIXct("2025-08-12 14:30:00", tz = "America/New_York")
-
-#AVERAGE_VOL <- AverageVolatility(VolatilityDf = REALIZED_VOLATILITY,
-#                                 DatetimeCol = "datetime",
-#                                 From = FROM, To = TO)
-
 TICKERS <- setdiff(colnames(REALIZED_VOLATILITY), "datetime")
 
 MARKET_CAP <- GetMarketCapPolygon(tickers = TICKERS,
                                       api_key = POLYGON_KEY)
 SECTORS <- GetSectorsWikipedia(tickers = TICKERS)
 
+
+
+#___________________________________GRAPH_______________________________________
+
+# In this section we generate the graph of local volatility connections.
+# The graph uses the total score matrix W_total as edge weight and market
+# capitalization as node size.
