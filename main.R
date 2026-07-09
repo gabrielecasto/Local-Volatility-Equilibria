@@ -16,7 +16,8 @@ sources <- c(
   "cleaning.R",
   "Volatility_Window.R",
   "Volatility_Equilibria.R",
-  "Map.R"
+  "Map.R",
+  "Graph.R"
 )
 
 stopifnot(all(file.exists(sources)))
